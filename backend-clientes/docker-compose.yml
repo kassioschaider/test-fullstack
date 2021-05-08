@@ -5,7 +5,9 @@ services:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: "mysql"
-      MYSQL_DATABASE: "mysql"
+      MYSQL_DATABASE: "db_clientes"
+      MYSQL_USER: "kassio"
+      MYSQL_PASSWORD: "kassio"
     ports:
       - "3306:3306"
     networks:
