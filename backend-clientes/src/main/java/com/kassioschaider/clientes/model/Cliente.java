@@ -23,6 +23,7 @@ public class Cliente {
     private String nome;
     private String apelido;
     private Status status;
+    private String url;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
     private List<Email> emails = new ArrayList<>();

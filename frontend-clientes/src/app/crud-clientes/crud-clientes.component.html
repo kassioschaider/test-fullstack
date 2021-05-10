@@ -1,0 +1,149 @@
+<div class="container">
+
+  <button type="button" class="btn btn-outline-success" (click)="showModal=abrirModal()">Cadastrar</button>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Inscrição</th>
+        <th scope="col">Apelido</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Status</th>
+        <th scope="col">Opções</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let cliente of clientes">
+        <td>{{cliente.id}}</td>
+        <td>{{cliente.inscricao}}</td>
+        <td>{{cliente.apelido}}</td>
+        <td>{{cliente.nome}}</td>
+        <td>{{cliente.status}}</td>
+        <td>
+          <button type="button" class="btn btn-outline-primary btn-sm"
+            (click)="showModal=abrirModalComClienteSelecionado(cliente.id)">Editar</button>
+          <button type="button" class="btn btn-outline-danger btn-sm"
+            (click)="showModalDelete=abrirModalConfirmacaoExclusao(cliente.id)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show':showModal}">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Cadastro de Cliente</h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="container">
+
+            <div class="col">
+              <img src="{{ person }}" alt="..." width="180px" class="img-thumbnail rounded float-left">
+            </div>
+
+            <div class="col">
+              <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+                <div class="form-group d-flex flex-row">
+                  <div>
+                    <label for="inscricao" class="padding-form">Inscrição</label>
+                  </div>
+                  <div>
+                    <input type="text" class="form-control" id="inscricao" formControlName="inscricao" placeholder="Insira a Inscrição">
+                  </div>
+                </div>
+
+                <div class="form-group d-flex flex-row">
+                  <div>
+                    <label for="apelido" class="padding-form">Apelido</label>
+                  </div>
+                  <div>
+                    <input type="text" class="form-control" id="apelido" formControlName="apelido" placeholder="Insira o apelido">
+                  </div>
+                </div>
+
+                <div class="form-group d-flex flex-row">
+                  <div>
+                    <label for="nome" class="padding-form">Nome</label>
+                  </div>
+                  <div>
+                    <input type="text" class="form-control" id="nome" formControlName="nome" placeholder="Insira o nome">
+                  </div>
+                </div>
+
+                <div class="form-group d-flex flex-row">
+                  <div>
+                    <label for="status" class="padding-form">Status</label>
+                  </div>
+                  <div>
+                    <input type="text" class="form-control" id="status" formControlName="status" placeholder="Insira o status">
+                  </div>
+                </div>
+
+                <div>
+                  <button type="submit" class="btn btn-outline-success">Cadastrar</button>
+                  <button type="button" class="btn btn-outline-secondary" (click)="showModal=fecharModal()">Cancelar</button>
+                </div>
+
+              </form>
+            </div>
+
+            <div class="col">
+              <table class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Inscrição</th>
+                    <th scope="col">Apelido</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Opções</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let cliente of clientes">
+                    <td>{{cliente.id}}</td>
+                    <td>{{cliente.inscricao}}</td>
+                    <td>{{cliente.apelido}}</td>
+                    <td>{{cliente.nome}}</td>
+                    <td>{{cliente.status}}</td>
+                    <td>
+                      <button type="button" class="btn btn-outline-primary btn-sm"
+                        (click)="showModal=abrirModalComClienteSelecionado(cliente.id)">Editar</button>
+                      <button type="button" class="btn btn-outline-danger btn-sm"
+                        (click)="showModalDelete=abrirModalConfirmacaoExclusao(cliente.id)">Excluir</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" [ngClass]="{'show':showModalDelete}">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            Deseja confirmar a exclusão?
+          </h5>
+        </div>
+        <div class="modal-body">
+          <button type="button" class="btn btn-outline-success" (click)="showModalDelete=onDelete()">Sim</button>
+          <button type="button" class="btn btn-outline-secondary" (click)="showModalDelete=fecharModal()">Não</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,31 @@
+.ng-invalid.ng-touched:not(form) {
+  border: 1px solid red;
+}
+
+.modal.show {
+  display: block;
+}
+
+.body {
+  line-height: 2;
+}
+
+.modal-title {
+  font-size: 1rem !important;
+}
+
+.modal-header {
+  padding: 10px;
+}
+
+.modal-body {
+  padding-top: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 0px;
+}
+
+.padding-form {
+  padding-right: 20px;
+  padding-left: 20px;
+}
