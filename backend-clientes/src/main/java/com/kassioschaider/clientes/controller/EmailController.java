@@ -2,6 +2,7 @@ package com.kassioschaider.clientes.controller;
 
 import com.kassioschaider.clientes.service.EmailService;
 import com.kassioschaider.clientes.service.dto.EmailDTO;
+import com.kassioschaider.clientes.service.dto.EmailListDTO;
 import com.kassioschaider.clientes.util.ResponseUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class EmailController {
     private final EmailService emailService;
 
     @GetMapping("emails")
-    public List<EmailDTO> list() {
+    public List<EmailListDTO> list() {
         return emailService.list();
     }
 

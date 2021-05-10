@@ -6,6 +6,8 @@ import { ValidateBrService } from 'angular-validate-br';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Email } from './model/email.model';
 import { StatusEnum } from './model/status.enum';
+import { EmailsService } from './emails.service';
+import { CategoriasService } from './categorias.service';
 
 @Component({
   selector: 'crud-clientes',
@@ -15,12 +17,14 @@ import { StatusEnum } from './model/status.enum';
 export class CrudClientesComponent implements OnInit {
 
   formulario: FormGroup;
+  formularioEmail: FormGroup;
   clientes: Cliente[];
   idClienteSelecionadoDelete: number;
   clienteSelecionado: Cliente;
   alerta: string = '';
   showModal: any;
   showModalDelete: any;
+  showModalEmail: any;
   person: any = "/assets/person.svg";
   emails: Email[];
   statusAll: any = StatusEnum;
@@ -28,6 +32,8 @@ export class CrudClientesComponent implements OnInit {
 
   constructor(
     private clienteService: CrudClientesService,
+    private emailService: EmailsService,
+    private categoriaService: CategoriasService,
     private formBuilder: FormBuilder,
     private validateBrService: ValidateBrService) {
       this.statusAllString = Object.keys(this.statusAll).filter(k => !isNaN(Number(k)));
@@ -35,6 +41,7 @@ export class CrudClientesComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregamentoDosClientes();
+
     this.formulario = this.formBuilder.group({
       id: [null],
       inscricao: [null, [Validators.required, this.validateBrService.cnpj]],
@@ -43,6 +50,14 @@ export class CrudClientesComponent implements OnInit {
       status: [null, [Validators.required]],
       url: [null],
       emails: [null]
+    });
+
+    this.formularioEmail = this.formBuilder.group({
+      id: [null],
+      idCliente: [null],
+      nomeCategoria: [null],
+      nome: [null, [Validators.min(3), Validators.maxLength(50), Validators.required]],
+      email: [null, [Validators.email, Validators.required]]
     });
   }
 
@@ -113,6 +128,18 @@ export class CrudClientesComponent implements OnInit {
         this.formulario.setValue(dados);
         if(this.formulario.controls.url.value) this.person = this.formulario.controls.url.value;
         if(this.formulario.controls.emails.value) this.emails = this.formulario.controls.emails.value;
+      });
+
+    return true;
+  }
+
+  abrirModalComEmailSelecionado(idSelecionado) {
+
+    this.emailService.obterPorId(idSelecionado).subscribe(
+      dados => {
+        this.formularioEmail.setValue(dados);
+        // if(this.formularioEmail.controls.url.value) this.person = this.formulario.controls.url.value;
+        // if(this.formularioEmail.controls.emails.value) this.emails = this.formulario.controls.emails.value;
       });
 
     return true;

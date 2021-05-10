@@ -1,13 +1,14 @@
 package com.kassioschaider.clientes.service;
 
 import com.kassioschaider.clientes.service.dto.EmailDTO;
+import com.kassioschaider.clientes.service.dto.EmailListDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface EmailService {
 
-    List<EmailDTO> list();
+    List<EmailListDTO> list();
 
     EmailDTO create(EmailDTO emailDTO);
 

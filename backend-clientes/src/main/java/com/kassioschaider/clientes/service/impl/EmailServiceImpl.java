@@ -4,6 +4,8 @@ import com.kassioschaider.clientes.model.Email;
 import com.kassioschaider.clientes.repository.EmailRepository;
 import com.kassioschaider.clientes.service.EmailService;
 import com.kassioschaider.clientes.service.dto.EmailDTO;
+import com.kassioschaider.clientes.service.dto.EmailListDTO;
+import com.kassioschaider.clientes.service.mapper.EmailListMapper;
 import com.kassioschaider.clientes.service.mapper.EmailMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,14 @@ public class EmailServiceImpl implements EmailService {
     private final EmailRepository emailRepository;
 
     @Autowired
+    private final EmailListMapper emailListMapper;
+
+    @Autowired
     private final EmailMapper emailMapper;
 
     @Override
-    public List<EmailDTO> list() {
-        return emailMapper.toDto(emailRepository.findAll());
+    public List<EmailListDTO> list() {
+        return emailListMapper.toDto(emailRepository.findAll());
     }
 
     @Override

@@ -88,7 +88,7 @@
                 </div>
 
                 <div>
-                  <button type="submit" class="btn btn-outline-success">Cadastrar</button>
+                  <button type="submit" class="btn btn-outline-success">Salvar</button>
                   <button type="button" class="btn btn-outline-secondary" (click)="showModal=fecharModal()">Cancelar</button>
                 </div>
 
@@ -100,20 +100,21 @@
                 <thead>
                   <tr>
                     <th scope="col">Emails: </th>
+                    <button type="button" class="btn btn-outline-success" (click)="showModal=abrirModal()">+</button>
                   </tr>
                 </thead>
 
                 <tbody>
                   <tr *ngFor="let email of emails">
                     <td>{{email.id}}</td>
-                    <td>{{email.idCategoria}}</td>
+                    <td>{{email.nomeCategoria}}</td>
                     <td>{{email.nome}}</td>
                     <td>{{email.email}}</td>
                     <td>
                       <button type="button" class="btn btn-outline-primary btn-sm"
-                        (click)="showModal=abrirModalComClienteSelecionado(cliente.id)">Editar</button>
+                        (click)="showModalEmail=abrirModalComEmailSelecionado(email.id)">Editar</button>
                       <button type="button" class="btn btn-outline-danger btn-sm"
-                        (click)="showModalDelete=abrirModalConfirmacaoExclusao(cliente.id)">Excluir</button>
+                        (click)="showModalDelete=abrirModalConfirmacaoExclusaoEmail(email.id)">Excluir</button>
                     </td>
                   </tr>
                 </tbody>
@@ -137,6 +138,62 @@
         <div class="modal-body">
           <button type="button" class="btn btn-outline-success" (click)="showModalDelete=onDelete()">Sim</button>
           <button type="button" class="btn btn-outline-secondary" (click)="showModalDelete=fecharModal()">Não</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" tabindex="-1" role="dialog" [ngClass]="{'show':showModalEmail}">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Cadastro de Email</h4>
+        </div>
+
+        <div class="modal-body">
+          <div class="container">
+
+            <div class="col">
+              <form [formGroup]="formularioEmail" (ngSubmit)="onSubmit()">
+
+                <div class="form-group d-flex flex-row">
+                  <div>
+                    <label for="nome" class="padding-form">Nome</label>
+                  </div>
+                  <div>
+                    <input type="text" class="form-control" id="nome" formControlName="nome" placeholder="Insira o apelido">
+                  </div>
+                </div>
+
+                <div class="form-group d-flex flex-row">
+                  <div>
+                    <label for="email" class="padding-form">Email</label>
+                  </div>
+                  <div>
+                    <input type="text" class="form-control" id="email" formControlName="email" placeholder="Insira o nome">
+                  </div>
+                </div>
+
+                <!-- <div class="form-group d-flex flex-row">
+                  <div>
+                    <label for="status" class="padding-form">Status</label>
+                  </div>
+                  <div>
+                    <select class="form-control" formControlName="categoria" type="number">
+                      <option *ngFor="let sts of statusAllString" [value]="statusAll[sts]" [label]="statusAll[sts]"></option>
+                    </select>
+                  </div>
+                </div> -->
+
+                <div>
+                  <button type="submit" class="btn btn-outline-success">Salvar</button>
+                  <button type="button" class="btn btn-outline-secondary" (click)="showModalEmail=fecharModal()">Cancelar</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>

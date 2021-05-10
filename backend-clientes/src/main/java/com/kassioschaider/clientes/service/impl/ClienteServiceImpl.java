@@ -7,7 +7,7 @@ import com.kassioschaider.clientes.service.dto.ClienteDTO;
 import com.kassioschaider.clientes.service.dto.ClienteListDTO;
 import com.kassioschaider.clientes.service.mapper.ClienteListMapper;
 import com.kassioschaider.clientes.service.mapper.ClienteMapper;
-import com.kassioschaider.clientes.service.mapper.EmailMapper;
+import com.kassioschaider.clientes.service.mapper.EmailListMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class ClienteServiceImpl implements ClienteService {
     private final ClienteMapper clienteMapper;
 
     @Autowired
-    private final EmailMapper emailMapper;
+    private final EmailListMapper emailListMapper;
 
     @Override
     public List<ClienteListDTO> list() {
@@ -58,7 +58,7 @@ public class ClienteServiceImpl implements ClienteService {
 
         Cliente cliente = optionalCliente.get();
         ClienteDTO clienteDTO = clienteMapper.toDto(cliente);
-        clienteDTO.setEmails(emailMapper.toDto(cliente.getEmails()));
+        clienteDTO.setEmails(emailListMapper.toDto(cliente.getEmails()));
 
         return Optional.of(clienteDTO);
     }
