@@ -37,9 +37,9 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public ClienteDTO create(ClienteDTO clienteDTO) {
-        Cliente cliente = clienteMapper.toEntity(clienteDTO);
-        return clienteMapper.toDto(clienteRepository.save(cliente));
+    public ClienteListDTO create(ClienteListDTO clienteListDTO) {
+        Cliente cliente = clienteListMapper.toEntity(clienteListDTO);
+        return clienteListMapper.toDto(clienteRepository.save(cliente));
     }
 
     @Override

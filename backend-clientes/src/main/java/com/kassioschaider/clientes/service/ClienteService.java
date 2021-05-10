@@ -10,7 +10,7 @@ public interface ClienteService {
 
     List<ClienteListDTO> list();
 
-    ClienteDTO create(ClienteDTO clienteDTO);
+    ClienteListDTO create(ClienteListDTO clienteListDTO);
 
     ClienteDTO update(ClienteDTO clienteDTO);
 

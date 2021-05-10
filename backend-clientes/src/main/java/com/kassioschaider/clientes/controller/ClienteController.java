@@ -29,8 +29,8 @@ public class ClienteController {
 
     @Transactional
     @PostMapping("clientes")
-    public ResponseEntity<ClienteDTO> create(@RequestBody ClienteDTO clienteDto, UriComponentsBuilder uriBuilder) {
-        ClienteDTO result = clienteService.create(clienteDto);
+    public ResponseEntity<ClienteListDTO> create(@RequestBody ClienteListDTO clienteListDTO, UriComponentsBuilder uriBuilder) {
+        ClienteListDTO result = clienteService.create(clienteListDTO);
         return ResponseEntity.created(uriBuilder.path("/clientes/{id}")
                 .buildAndExpand(result.getId()).toUri())
                 .body(result);
