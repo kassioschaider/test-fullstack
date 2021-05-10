@@ -1,6 +1,5 @@
 package com.kassioschaider.clientes.controller;
 
-import com.kassioschaider.clientes.model.Cliente;
 import com.kassioschaider.clientes.service.ClienteService;
 import com.kassioschaider.clientes.service.dto.ClienteDTO;
 import com.kassioschaider.clientes.service.dto.ClienteListDTO;

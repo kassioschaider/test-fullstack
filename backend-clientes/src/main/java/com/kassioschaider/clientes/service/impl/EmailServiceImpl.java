@@ -4,7 +4,6 @@ import com.kassioschaider.clientes.model.Email;
 import com.kassioschaider.clientes.repository.EmailRepository;
 import com.kassioschaider.clientes.service.EmailService;
 import com.kassioschaider.clientes.service.dto.EmailDTO;
-import com.kassioschaider.clientes.service.dto.EmailDTO;
 import com.kassioschaider.clientes.service.mapper.EmailMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
