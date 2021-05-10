@@ -21,6 +21,6 @@ public class ClienteDTO implements Serializable {
     private String inscricao;
     private String nome;
     private String apelido;
-    private Status status;
+    private Status status = Status.ATIVADO;
     private List<EmailDTO> emails;
 }
