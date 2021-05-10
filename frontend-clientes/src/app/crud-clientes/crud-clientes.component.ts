@@ -8,6 +8,7 @@ import { Email } from './model/email.model';
 import { StatusEnum } from './model/status.enum';
 import { EmailsService } from './emails.service';
 import { CategoriasService } from './categorias.service';
+import { Categoria } from './model/categoria.model';
 
 @Component({
   selector: 'crud-clientes',
@@ -29,6 +30,7 @@ export class CrudClientesComponent implements OnInit {
   emails: Email[];
   statusAll: any = StatusEnum;
   statusAllString: String[];
+  categoriasEmail: Categoria[];
 
   constructor(
     private clienteService: CrudClientesService,
@@ -41,7 +43,6 @@ export class CrudClientesComponent implements OnInit {
 
   ngOnInit(): void {
     this.carregamentoDosClientes();
-
     this.formulario = this.formBuilder.group({
       id: [null],
       inscricao: [null, [Validators.required, this.validateBrService.cnpj]],
@@ -55,7 +56,7 @@ export class CrudClientesComponent implements OnInit {
     this.formularioEmail = this.formBuilder.group({
       id: [null],
       idCliente: [null],
-      nomeCategoria: [null],
+      idCategoria: [null],
       nome: [null, [Validators.min(3), Validators.maxLength(50), Validators.required]],
       email: [null, [Validators.email, Validators.required]]
     });
@@ -138,11 +139,17 @@ export class CrudClientesComponent implements OnInit {
     this.emailService.obterPorId(idSelecionado).subscribe(
       dados => {
         this.formularioEmail.setValue(dados);
-        // if(this.formularioEmail.controls.url.value) this.person = this.formulario.controls.url.value;
-        // if(this.formularioEmail.controls.emails.value) this.emails = this.formulario.controls.emails.value;
+        this.carregarComboCategorias();
       });
 
     return true;
+  }
+
+  carregarComboCategorias() {
+    this.categoriaService.obterTodos()
+      .subscribe(dados => {
+        this.categoriasEmail = <Categoria[]>dados;
+      });
   }
 
   resetarFormulario() {

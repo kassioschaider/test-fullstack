@@ -175,16 +175,17 @@
                   </div>
                 </div>
 
-                <!-- <div class="form-group d-flex flex-row">
+                <div class="form-group d-flex flex-row">
                   <div>
-                    <label for="status" class="padding-form">Status</label>
+                    <label for="categoria" class="padding-form">Categoria</label>
                   </div>
                   <div>
-                    <select class="form-control" formControlName="categoria" type="number">
-                      <option *ngFor="let sts of statusAllString" [value]="statusAll[sts]" [label]="statusAll[sts]"></option>
+                    <select class="form-control" type="number" [(ngModel)]="this.formularioEmail.controls.idCategoria" id="categoria" formControlName="idCategoria">
+                      <option *ngFor="let cat of categoriasEmail" [ngValue]="cat.id">
+                        {{ cat.nome }}</option>
                     </select>
                   </div>
-                </div> -->
+                </div>
 
                 <div>
                   <button type="submit" class="btn btn-outline-success">Salvar</button>
