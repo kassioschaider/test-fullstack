@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Cliente } from './model/cliente.component';
+import { Cliente } from './model/cliente.model';
 import { CrudClientesService } from './crud-clientes.service';
 import { ValidateBrService } from 'angular-validate-br';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Email } from './model/email.model';
+import { StatusEnum } from './model/status.enum';
 
 @Component({
   selector: 'crud-clientes',
@@ -20,11 +22,16 @@ export class CrudClientesComponent implements OnInit {
   showModal: any;
   showModalDelete: any;
   person: any = "/assets/person.svg";
+  emails: Email[];
+  statusAll: any = StatusEnum;
+  statusAllString: String[];
 
   constructor(
     private clienteService: CrudClientesService,
     private formBuilder: FormBuilder,
-    private validateBrService: ValidateBrService) { }
+    private validateBrService: ValidateBrService) {
+      this.statusAllString = Object.keys(this.statusAll).filter(k => !isNaN(Number(k)));
+    }
 
   ngOnInit(): void {
     this.carregamentoDosClientes();
@@ -105,6 +112,7 @@ export class CrudClientesComponent implements OnInit {
       dados => {
         this.formulario.setValue(dados);
         if(this.formulario.controls.url.value) this.person = this.formulario.controls.url.value;
+        if(this.formulario.controls.emails.value) this.emails = this.formulario.controls.emails.value;
       });
 
     return true;
@@ -113,6 +121,7 @@ export class CrudClientesComponent implements OnInit {
   resetarFormulario() {
     this.formulario.reset();
     this.person = "/assets/person.svg";
+    this.emails = [];
   }
 
   abrirModal() {
